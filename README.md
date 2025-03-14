@@ -1,4 +1,4 @@
-# String Equality Comparison
+# Recursive vs Iterative
 
 This repo is related to the **Algorithm All-Hands Projects** (AAHP) described within the [Algorithmology.org](https://algorithmology.org/) curriculum.
 
@@ -22,7 +22,7 @@ The group working on the project housed in this repo is:
 
 ### Research Question
 
-TODO: document RQ once approved
+How does recursion impact time overhead in Python compared to iterative solutions for calculating Fibonacci number sequences?
 
 ### Evaluation Metrics
 
