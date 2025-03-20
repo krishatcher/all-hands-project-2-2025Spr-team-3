@@ -2,10 +2,11 @@
 
 from fibonacci import memoization
 
+
 # Test case to verify base cases of the Fibonacci sequence
 def test_fibonacci_base_cases():
     """Confirm that base cases return the expected Fibonacci values."""
-    assert memoization.mem_fibonacci(0, {}) == 1
+    assert memoization.mem_fibonacci(0, {}) == 0
     assert memoization.mem_fibonacci(1, {}) == 1
     assert memoization.mem_fibonacci(2, {}) == 1
 

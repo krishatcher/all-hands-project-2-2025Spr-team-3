@@ -17,8 +17,8 @@ def mem_fibonacci(n: int, memo: Dict[int, int])-> int:
         return memo[n]
     # create the base case for handling 1 & 2 fibonacci numbers
     base_case = 2
-    if n <= base_case:
-        return 1
+    if n < base_case:
+        return n
 
     #calculate the fibonacci for nth number
     memo[n] = mem_fibonacci(n - 1, memo) + mem_fibonacci(n - 2, memo)
