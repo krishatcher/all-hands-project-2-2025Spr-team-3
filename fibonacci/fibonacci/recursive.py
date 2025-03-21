@@ -1,4 +1,4 @@
-def fibonacci(n: int) -> int:
+def fibonacci_recursive(n: int) -> int:
     """Generates the Fibonacci sequence up to the nth term using recursion without memoization."""
 
     # Handle negative inputs
@@ -12,4 +12,4 @@ def fibonacci(n: int) -> int:
         return 1
 
     # do the recursive calculation for the nth number
-    return fibonacci(n - 1) + fibonacci(n - 2)
+    return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
