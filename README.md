@@ -30,7 +30,23 @@ TODO: document evaluation metrics once decided upon
 
 ### Process
 
-TODO: document process once decided upon
+* Each member of the team was assigned a portion of the code implementation to complete.
+* Once all code is implemented, each team member will run the same set of benchmarking runs and add their data to the shared Google Sheet.
+* Each team member will then complete part of a writeup, specifically a portion of the writeup about the code they implemented. This writeup will be published on [algorithmology.org/allhands](https://algorithmology.org/allhands/) at the conclusion of the project.
+
+The set of runs each team member completed are listed below. This same set of commands is included as a shell file (`benchmark_commands.sh`) which can be run as a simpler way to get the same output.
+
+| ID  | Quantity | Approach    | Runs | Repeats |
+| :-: | :------: | ----------- | :--: | :-----: |
+| 1   | 7        | iterative   | 15   | 5       |
+| 2   | 14       | iterative   | 15   | 5       |
+| 3   | 28       | iterative   | 15   | 5       |
+| 4   | 7        | recursive   | 15   | 5       |
+| 5   | 14       | recursive   | 15   | 5       |
+| 6   | 28       | recursive   | 15   | 5       |
+| 7   | 7        | memoization | 15   | 5       |
+| 8   | 14       | memoization | 15   | 5       |
+| 9   | 28       | memoization | 15   | 5       |
 
 ## Running the Experiment
 
