@@ -1,47 +1,82 @@
+"""Implementation of the Benchmarking toolset"""
+
+import timeit
+from typing import List
+
 import typer
-from iterative import fibonacci_iterative
-from memoization import fibonacci_memoization
-from recursive import fibonacci_recursive
+from rich.console import Console
 
-# Create a Typer app
-app = typer.Typer()
+from fibonacci.approach import GenerationApproach
+from fibonacci.analyze import calculate_average_values
 
-@app.command()
+# create a Typer object to support the command-line interface
+cli = typer.Typer()
+
+# create a console for rich text output
+console = Console()
+
+
+@cli.command()
 def main(
-    n: int = typer.Argument(..., help="The Fibonacci number to compute."),
-    # Add an option to specify the approach
-    approach: str = typer.Option(
-        # Default to the recursive approach
-        "iterative",
-        # Specify the help message for the option
-        help="Choose between 'recursive', 'iterative', or 'memoized'."
-    )
+    quantity: int = typer.Option(100),
+    approach: GenerationApproach = GenerationApproach.ITERATIVE,
+    runs: int = typer.Option(15),
+    repeats: int = typer.Option(5),
 ):
     """
-    Compute the nth Fibonacci number using the specified approach.
+    Compute the Fibonacci sequence using the specified approach.
     """
-    # Select the approach
-    if approach == "recursive":
-        # Compute the Fibonacci number using the recursive approach
-        result = fibonacci_recursive(n)
-    elif approach == "iterative":
-        # Compute the Fibonacci number using the iterative approach
-        result = fibonacci_iterative(n)
-    elif approach == "memoized":
-        # Compute the Fibonacci number using the memoized approach
-        mem_dict: dict[int, int] = {}
-        result = fibonacci_memoization(n, mem_dict)
-    else:
-        typer.echo("Invalid method. Choose between 'recursive', 'iterative', or 'memoized'.")
-        # Exit with an error code
-        raise typer.Exit(code=1)
+    execution_times: List[float] = []
 
-    # Display the result
-    typer.echo(f"The {n}th Fibonacci number using the {approach} approach is: {result}")
+    console.print(
+        "==========================================================================="
+    )
+    console.print(
+        "                           Fibonacci Calculation                           "
+    )
+    console.print(
+        "==========================================================================="
+    )
+    console.print(
+        f" Calculating the first {quantity} entries in the Fibonacci sequence."
+    )
+    console.print(
+        f" Performing {repeats} sets of {runs} runs of the '{approach}' calculation approach."
+    )
+    console.print(
+        "---------------------------------------------------------------------------"
+    )
 
-if __name__ == "__main__":
-    app()
+    if approach == GenerationApproach.ITERATIVE:
+        execution_times = timeit.Timer(
+            f"fibonacci_iterative({quantity})",
+            setup="from fibonacci.iterative import fibonacci_iterative",
+        ).repeat(repeat=repeats, number=runs)
+    elif approach == GenerationApproach.RECURSIVE:
+        execution_times = timeit.Timer(
+            f"fibonacci_recursive({quantity})",
+            setup="from fibonacci.recursive import fibonacci_recursive",
+        ).repeat(repeat=repeats, number=runs)
+    elif approach == GenerationApproach.MEMOIZATION:
+        execution_times = timeit.Timer(
+            f"fibonacci_memoization({quantity})",
+            setup="from fibonacci.memoization import fibonacci_memoization",
+        ).repeat(repeat=repeats, number=runs)
+
+    avg_execution_times = calculate_average_values(execution_times, repeats)
+    console.print(" Total time (sec) for each set of runs:")
+    console.print(execution_times)
+    console.print("")
+    console.print(" Average times (sec) for each set of runs:")
+    console.print(avg_execution_times)
+    console.print(
+        "==========================================================================="
+    )
+
 
 # Sources:
 # geeksforgeeks.org for general information on fibonaccis
 # github copoilot for debugging and comment generation
+
+# logic influenced by AEP #2: https://github.com/Allegheny-Computer-Science-202-S2025/computer-science-202-algorithm-engineering-project-2-krishatcher
+# help to call timeit successfully: https://stackoverflow.com/questions/2819625/how-to-use-a-callable-as-the-setup-with-timeit-timer
