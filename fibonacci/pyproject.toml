@@ -28,7 +28,7 @@ flake8 = "^3.9.2"
 mypy = "^0.910"
 
 [tool.taskipy.variables]
-project = "comparison"
+project = "fibonacci"
 tests = "tests"
 readme = "../README.md"
 check-command = { var = "ruff check {project} {tests}", recursive = true }
