@@ -3,7 +3,7 @@
 from typing import Dict
 
 
-def fibonacci_memoization(n: int)-> int:
+def fibonacci_memoization(n: int) -> int:
     """
     Wrapper function which allows this approach to follow the pattern used by the other approaches
     """
@@ -11,12 +11,12 @@ def fibonacci_memoization(n: int)-> int:
     return fibonacci_generator(n, memo)
 
 
-def fibonacci_generator(n: int, memo: Dict[int, int])-> int:
+def fibonacci_generator(n: int, memo: Dict[int, int]) -> int:
     """Generates the Fibonacci sequence up to the nth term using memoization."""
     # handle negative inputs
     if n < 0:
         raise ValueError("Input must be a positive integer.")
-    # intialize a dictionary to store previously computed numbers.
+    # initialize a dictionary to store previously computed numbers.
     if memo is None:
         memo = {}
 
@@ -28,7 +28,9 @@ def fibonacci_generator(n: int, memo: Dict[int, int])-> int:
     if n < base_case:
         return n
 
-    #calculate the fibonacci for nth number
-    memo[n] = fibonacci_generator(n - 1, memo) + fibonacci_generator(n - 2, memo)
+    # calculate the fibonacci for nth number
+    memo[n] = fibonacci_generator(n - 1, memo) + fibonacci_generator(
+        n - 2, memo
+    )
     # return the appropriate fibonacci number
     return memo[n]

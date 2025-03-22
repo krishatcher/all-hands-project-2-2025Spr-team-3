@@ -1,4 +1,3 @@
-
 import pytest
 
 from fibonacci.recursive import fibonacci_recursive
