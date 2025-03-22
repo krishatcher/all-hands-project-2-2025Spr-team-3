@@ -1,6 +1,6 @@
 import typer
 from iterative import fibonacci_iterative
-from memoized import fibonacci_memoized
+from memoization import fibonacci_memoization
 from recursive import fibonacci_recursive
 
 # Create a Typer app
@@ -29,7 +29,8 @@ def main(
         result = fibonacci_iterative(n)
     elif approach == "memoized":
         # Compute the Fibonacci number using the memoized approach
-        result = fibonacci_memoized(n)
+        mem_dict: dict[int, int] = {}
+        result = fibonacci_memoization(n, mem_dict)
     else:
         typer.echo("Invalid method. Choose between 'recursive', 'iterative', or 'memoized'.")
         # Exit with an error code
