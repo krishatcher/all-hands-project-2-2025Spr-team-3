@@ -3,7 +3,7 @@
 from typing import Dict
 
 
-def mem_fibonacci(n: int, memo: Dict[int, int])-> int:
+def fibonacci_memoization(n: int, memo: Dict[int, int])-> int:
     """Generates the Fibonacci sequence up to the nth term using memoization."""
     # handle negative inputs
     if n < 0:
@@ -21,6 +21,6 @@ def mem_fibonacci(n: int, memo: Dict[int, int])-> int:
         return n
 
     #calculate the fibonacci for nth number
-    memo[n] = mem_fibonacci(n - 1, memo) + mem_fibonacci(n - 2, memo)
+    memo[n] = fibonacci_memoization(n - 1, memo) + fibonacci_memoization(n - 2, memo)
     # return the appropriate fibonacci number
     return memo[n]
