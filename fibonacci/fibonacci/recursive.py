@@ -1,3 +1,6 @@
+"""Recursive approach to calculate a Fibonacci sequence"""
+
+
 def fibonacci_recursive(n: int) -> int:
     """Generates the Fibonacci sequence up to the nth term using recursion without memoization."""
 

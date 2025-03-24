@@ -1,4 +1,3 @@
-
 import pytest
 
 from fibonacci.recursive import fibonacci_recursive
@@ -41,7 +40,7 @@ def test_type_handling():
 
     # Test the type of inputs and handling it
 
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         fibonacci_recursive(3.5)
     with pytest.raises(TypeError):
         fibonacci_recursive("string")
